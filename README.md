@@ -29,6 +29,10 @@ quello che vede.  Si intende dimostrare, tramite test di ablazione e valutazioni
 
 ```bash
 progetto/
+├── image_Encoder_Comparison/     # Immagini statiche del notebook 02
+│   ├── CLEVR_train_040602.png
+│   ├── CLEVR_train_046708.png
+│   ├── CLEVR_train_050337.png
 ├── notebooks/                  # Notebook Jupyter (Pipeline sequenziale)
 │   ├── 00_Setup_Environment.ipynb
 │   ├── 01_Preparation_Dataset.ipynb
