@@ -29,8 +29,6 @@ quello che vede.  Si intende dimostrare, tramite test di ablazione e valutazioni
 
 ```bash
 progetto/
-├── data/                       # Dataset processato e immagini (struttura attesa)
-├── indexes/                    # Indici JSON per i set di train/val/test
 ├── notebooks/                  # Notebook Jupyter (Pipeline sequenziale)
 │   ├── 00_Setup_Environment.ipynb
 │   ├── 01_Preparation_Dataset.ipynb
