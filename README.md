@@ -56,6 +56,4 @@ Il progetto è stato progettato per essere eseguito in ambiente **Google Colab**
 2. Aprire ed eseguire i notebook in ordine sequenziale (da `00_Setup` a `07_Evaluation`).
 3. Il notebook di comparazione degli encoder visuali utilizza 3 immagini specifiche data la loro complessità che sono incluse nel repository da includere nella cartella 'data/processed/images/train'
 
-**Per eseguire in locale:**
-I notebook riconoscono automaticamente l'assenza dell'ambiente Colab e mappano le directory relative in modo dinamico. Assicurarsi di avere Jupyter installato e avviare il server dalla directory radice del progetto.
 
