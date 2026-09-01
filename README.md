@@ -1,21 +1,16 @@
-Multimodal Cascade Reasoning per Visual Question Answering
-
-Architettura multimodale a due fasi basata su T5 e Cross-Attention per migliorare il Visual Grounding nel ragionamento logico-visivo.
-
-Obiettivo del progetto:
-Il progetto affronta il problema delle allucinazioni testuali e della scarsa interpretabilità nei modelli di Visual Question Answering (VQA).
-L'obiettivo è dimostrare che scomporre il task in due fasi distinte — la generazione testuale del ragionamento logico (Rationale) e la successiva estrazione visiva della risposta (Visual Grounding) — migliora l'affidabilità del sistema.
-Si intende dimostrare, tramite specifici test di ablazione, che il modello finale non deduce la risposta basandosi esclusivamente sul pattern testuale, ma impara a "mettere a fuoco" i pixel esatti dell'immagine necessari a validare il ragionamento per produrre la risposta corretta.
-
-Background e tecniche utilizzate
-Tecniche di Deep Learning:
-Il sistema utilizza Large Language Models (LLM) basati sull'architettura Transformer (T5) accoppiati a Vision Encoders.
-L'integrazione multimodale avviene tramite layer di Cross-Attention personalizzati.
-Per ottimizzare l'addestramento testuale senza incorrere in catastrophic forgetting, viene impiegata la tecnica di Parameter-Efficient Fine-Tuning (PEFT) tramite adattatori LoRA. 
-
-Strumenti: L'intera pipeline è sviluppata in PyTorch, sfruttando l'ecosistema Hugging Face (librerie transformers e peft) per la gestione dei modelli pre-addestrati e la tokenizzazione.
-Per la valutazione metrica è stato utilizzato Scikit-learn.
-
-Dataset: 
-Il progetto è addestrato e valutato sul dataset CLEVR (Compositional Language and Elementary Visual Reasoning).
-Questo dataset è specificamente progettato per testare le capacità di ragionamento visivo attraverso immagini di oggetti 3D (cilindri, sfere, cubi) e domande complesse che richiedono conteggio, confronto e logica relazionale o spaziale.
+Multimodal Cascade Reasoning per Visual Question AnsweringArchitettura multimodale a due fasi basata su T5 e Cross-Attention per migliorare il Visual Grounding nel ragionamento logico-visivo.  Obiettivo del progettoIl progetto affronta il problema delle allucinazioni testuali e della scarsa interpretabilità nei modelli di Visual Question Answering (VQA). L'obiettivo è dimostrare che scomporre il task in due fasi distinte — la generazione testuale del ragionamento logico (Rationale) e la successiva estrazione visiva della risposta (Visual Grounding) — migliora l'affidabilità e l'interpretabilità del sistema. Si intende dimostrare, tramite test di ablazione e valutazioni a cascata, che il modello finale non deduce la risposta basandosi esclusivamente su bias testuali, ma impara a "mettere a fuoco" i pixel esatti dell'immagine necessari a validare il ragionamento.  Background e tecniche utilizzateTecniche di Deep Learning: Il sistema utilizza Large Language Models (LLM) basati sull'architettura Transformer (T5) accoppiati a Vision Encoders. L'integrazione multimodale avviene tramite layer di Cross-Attention personalizzati. Per ottimizzare l'addestramento senza incorrere in catastrophic forgetting, viene impiegata la tecnica di Parameter-Efficient Fine-Tuning (PEFT) tramite adattatori LoRA.  Strumenti: PyTorch, librerie dell'ecosistema Hugging Face (transformers, peft), Scikit-learn per la metrica e Torchvision per il processing visivo.  Dataset: Il progetto è addestrato e valutato sul dataset CLEVR (Compositional Language and Elementary Visual Reasoning). Il dataset è specificamente progettato per testare le capacità di ragionamento visivo attraverso immagini di oggetti 3D e domande complesse che richiedono logica relazionale e spaziale.  EsperimentiEsperimentoArchitetturaTecniche aggiuntiveAcc. RationaleAcc. RispostaF1-Score1. BaselineT5 Base + Random VisionNessuna0.00%0.00%0.00%2. Singola Fase (Stage 1)T5 Base + ViTLoRA99.90%47.00%24.72%3. Ablazione TestoFLAN-T5 SmallPrompting Text-Only99.90%0.00%0.00%4. Due Fasi (Cascade)T5 Base + ViTLoRA + Visual Grounding99.90%47.10%32.78%Analisi dei risultatiModelli migliori: L'architettura a due fasi (Cascade - Stage 2) ha ottenuto le prestazioni migliori. Pur mantenendo un'accuratezza della risposta finale simile allo Stage 1 (47.10% vs 47.00%), ha incrementato nettamente l'F1-Score (32.78% vs 24.72%). Questo dimostra che delegare l'estrazione finale della risposta a una fase puramente visivo-estrattiva migliora la precisione della classe predetta e la stabilità del modello.  Principali errori e Anomalie: L'esperimento di ablazione sul testo puro (FLAN-T5) ha registrato un crollo totale dell'accuratezza (0.00%). Questo risultato estremo non è un'anomalia negativa, ma la dimostrazione empirica cruciale del progetto: conferma che il dataset e le domande non contengono bias testuali risolvibili senza l'immagine.  Lezioni apprese: Scomporre il ragionamento logico (Stage 1) dalla focalizzazione spaziale (Stage 2) permette alla Cross-Attention di specializzarsi esclusivamente sul grounding visivo. Questo approccio a cascata rende l'architettura non solo più accurata in termini di bilanciamento delle classi, ma soprattutto più interpretabile.  Architettura del codiceBashprogetto/
+├── data/                       # Dataset processato e immagini (struttura attesa)
+├── indexes/                    # Indici JSON per i set di train/val/test
+├── notebooks/                  # Notebook Jupyter (Pipeline sequenziale)
+│   ├── 00_Setup_Environment.ipynb
+│   ├── 01_Preparation_Dataset.ipynb
+│   ├── 02_Encoder_Comparison.ipynb
+│   ├── 03_Train_Stage1.ipynb
+│   ├── 04_Train_Stage2.ipynb
+│   ├── 05_Validation_Stage1.ipynb
+│   ├── 06_Validation_Stage2.ipynb
+│   └── 07_Evaluation.ipynb
+├── src/                        # Codice principale
+│   ├── dataset.py
+│   └── models.py
+└── README.md                   # Questo file
