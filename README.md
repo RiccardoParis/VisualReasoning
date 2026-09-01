@@ -1,4 +1,5 @@
 Multimodal Cascade Reasoning per Visual Question Answering
+
 Architettura multimodale a due fasi basata su T5 e Cross-Attention per migliorare il Visual Grounding nel ragionamento logico-visivo.
 
 Obiettivo del progetto:
