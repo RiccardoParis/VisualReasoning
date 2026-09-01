@@ -42,3 +42,16 @@ progetto/
 │   ├── dataset.py
 │   └── models.py
 └── README.md                   # Questo file
+```
+## Setup ed Esecuzione
+
+Il progetto è stato progettato per essere eseguito in ambiente **Google Colab** o in locale. Tutte le dipendenze necessarie (`transformers`, `peft`, `torchao`, ecc.) vengono installate e gestite automaticamente nelle prime celle di ogni notebook. Non è richiesto un file `requirements.txt` globale.
+
+**Per eseguire su Google Colab:**
+1. Caricare l'intera cartella del progetto sul proprio Google Drive assicurandosi che il percorso sia esattamente: `MyDrive/DeepLearning`. In caso contrario, aggiornare la variabile `PROJECT_ROOT` nella prima cella dei notebook.
+2. Aprire ed eseguire i notebook in ordine sequenziale (da `00_Setup` a `07_Evaluation`).
+3. Il notebook di comparazione degli encoder visuali utilizza 4 immagini specifiche data la loro complessità che sono incluse nel repository da includere nella cartella 'data/processed/images/train'
+
+**Per eseguire in locale:**
+I notebook riconoscono automaticamente l'assenza dell'ambiente Colab e mappano le directory relative in modo dinamico. Assicurarsi di avere Jupyter installato e avviare il server dalla directory radice del progetto.
+
