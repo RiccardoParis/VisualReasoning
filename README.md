@@ -3,7 +3,8 @@
 > Architettura multimodale a due fasi basata su T5 e Cross-Attention per migliorare il Visual Grounding nel ragionamento logico-visivo.
 
 ## Obiettivo del progetto
-Il progetto affronta il problema delle allucinazioni testuali e della scarsa interpretabilità nei modelli di Visual Question Answering (VQA). L'obiettivo è dimostrare che scomporre il task in due fasi distinte — la generazione testuale del ragionamento logico (Rationale) e la successiva estrazione visiva della risposta (Visual Grounding) — migliora l'affidabilità e l'interpretabilità del sistema. Si intende dimostrare, tramite test di ablazione e valutazioni a cascata, che il modello finale non deduce la risposta basandosi esclusivamente su bias testuali, ma impara a "mettere a fuoco" i pixel esatti dell'immagine necessari a validare il ragionamento.
+Il progetto affronta il problema delle allucinazioni testuali e della scarsa interpretabilità nei modelli di Visual Question Answering (VQA).Avere un sistema in grado di rispondere a domande complesse su immagini. La risposta richiede passaggi sequenziali che simulino il ragionamento effettivo sull'immagine, non può basarsi su risposte statistiche ma deve effettivamente "ragionare" su 
+quello che vede.  Si intende dimostrare, tramite test di ablazione e valutazioni a cascata, che il modello finale non deduce la risposta basandosi esclusivamente su bias testuali, ma impara a "mettere a fuoco" i pixel esatti dell'immagine necessari a validare il ragionamento.
 
 ## Background e tecniche utilizzate
 * **Tecniche di Deep Learning:** Il sistema utilizza Large Language Models (LLM) basati sull'architettura Transformer (T5) accoppiati a Vision Encoders. L'integrazione multimodale avviene tramite layer di Cross-Attention personalizzati. Per ottimizzare l'addestramento senza incorrere in *catastrophic forgetting*, viene impiegata la tecnica di Parameter-Efficient Fine-Tuning (PEFT) tramite adattatori LoRA.
